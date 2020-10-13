@@ -18,8 +18,8 @@ public class BuyerAgent extends Agent {
     private BuyerAgent this_agent = this;
     private BuyerView buyerView;
     private String[] buyDetails = {null, null, null};
-    private boolean buyState = false;
 
+    @Override
     protected void setup() {
         System.out.println("Buyer agent " + getAID().getName() + " is ready");
 
@@ -43,13 +43,13 @@ public class BuyerAgent extends Agent {
                     DFAgentDescription[] result = DFService.search(myAgent, template);
                     System.out.println("Found the following seller agents:");
                     sellerAgents = new AID[result.length];
-                    
+
                     for (int i = 0; i < result.length; i++) {
                         sellerAgents[i] = result[i].getName();
                         System.out.println(sellerAgents[i].getName());
                     }
                     buyerView.printSellers(sellerAgents);
-                    
+
                 } catch (FIPAException fe) {
                     fe.printStackTrace();
                 }
@@ -57,20 +57,16 @@ public class BuyerAgent extends Agent {
             }
         });
     }
-    
-    public String[] getBuyDetails(){
+
+    public String[] getBuyDetails() {
         return buyDetails;
     }
-    public void setBuyDetails(String[] buyDetails){
+
+    public void setBuyDetails(String[] buyDetails) {
         this.buyDetails = buyDetails;
     }
-    public boolean getBuyState(){
-        return buyState;
-    }
-    public void setBuyState(boolean buyState){
-        this.buyState = buyState;
-    }
 
+    @Override
     protected void takeDown() {
         buyerView.printDetails(buyDetails);
         System.out.println("Buyer agent " + getAID().getName() + " terminating");

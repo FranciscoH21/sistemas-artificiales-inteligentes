@@ -25,13 +25,20 @@ public class SellerView extends javax.swing.JFrame {
         txtPriceSale.setEditable(false);
         
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
-                //this.sellerAgent.doDelete();
                 sellerAgent.doDelete();
             }
         });
+        
     }
     
+    /**
+     * Shows info about the last sale
+     * @param title title of the book
+     * @param buyer buyer agent
+     * @param price price of the book
+     */
     public void printBuyer(String title, String buyer, int price){
         txtBookSale.setText(title);
         txtBuyerSale.setText(buyer);
@@ -39,6 +46,10 @@ public class SellerView extends javax.swing.JFrame {
         printCatalogue(sellerAgent.getCatalogue());
     }
 
+    /**
+     * Shows the current catalogue
+     * @param catalogue books 
+     */
     public void printCatalogue(HashMap<String, Integer> catalogue) {
         cleanTable();
         for (String book : catalogue.keySet()) {
@@ -48,6 +59,9 @@ public class SellerView extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Cleans the catalogue table
+     */
     public void cleanTable() {
         for (int i = 0; i < tableRows; i++) {
             tbCatalogue.setValueAt("", i, 0);
@@ -84,7 +98,8 @@ public class SellerView extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         lbSellerName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lbSellerName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -261,6 +276,10 @@ public class SellerView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Saves a new book in the catalogue
+     * @param evt 
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         String title = txtTitle.getText().trim();
         String price = txtPrice.getText().trim();
@@ -285,20 +304,14 @@ public class SellerView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    /**
+     * Update catalogue table
+     * @param evt 
+     */
     private void btnUpdateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTableActionPerformed
         printCatalogue(sellerAgent.getCatalogue());
     }//GEN-LAST:event_btnUpdateTableActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    /*public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SellerView(sellerAgent).setVisible(true);
-            }
-        });
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;

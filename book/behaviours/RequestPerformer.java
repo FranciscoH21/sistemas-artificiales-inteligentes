@@ -5,6 +5,8 @@ import jade.core.AID;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class RequestPerformer extends Behaviour {
@@ -85,13 +87,13 @@ public class RequestPerformer extends Behaviour {
                         buyerAgent.setBuyDetails(new String[]{reply.getSender().getName(), Integer.toString(bestPrice), bookTitle});
 
                         myAgent.doDelete();
+         
                     } else {
                         buyerAgent.setBuyDetails(new String[]{null, null, null});
 
                         JOptionPane.showMessageDialog(null, "Attempt failed: requested book already sold.");
                         System.out.println("Attempt failed: requested book already sold.");
                     }
-                    buyerAgent.setBuyState(true);
 
                     step = 4;
                 } else {
@@ -103,7 +105,6 @@ public class RequestPerformer extends Behaviour {
 
     public boolean done() {
         if (step == 2 && bestSeller == null) {
-            buyerAgent.setBuyState(true);
             JOptionPane.showMessageDialog(null, "Attempt failed: " + bookTitle + " not available for sale");
             System.out.println("Attempt failed: " + bookTitle + " not available for sale");
         }

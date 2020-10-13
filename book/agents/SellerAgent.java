@@ -47,6 +47,7 @@ public class SellerAgent extends Agent {
 
     }
 
+    
     @Override
     protected void takeDown() {
         try {
@@ -54,9 +55,7 @@ public class SellerAgent extends Agent {
         } catch (FIPAException fe) {
             fe.printStackTrace();
         }
-
         sellerView.dispose();
-
         System.out.println("Seller agent " + getAID().getName() + "terminating");
     }
 
